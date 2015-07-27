@@ -1,0 +1,22 @@
+The planetary models are created in three steps:
+
+Step 1: inlist_create
+To set:
+    radius_in_cm_for_create_initial_model = ... ! in cgs
+    mass_in_gm_for_create_initial_model = ... ! in cgs
+    initial_Z = ...
+    initial_Y = ...
+
+Step 2: inlist_core
+To Set:
+    new_core_mass = ... ! in Msun
+    core_avg_rho = ... ! in cgs
+    core_avg_eps = ... ! in cgs
+
+Step 3: inlist_irradiate_and_evolve
+To Set:
+    max_age = ... ! yr
+    column_depth_for_irradiation = ... ! cgs
+    irradiation_flux = ... ! cgs
+
+

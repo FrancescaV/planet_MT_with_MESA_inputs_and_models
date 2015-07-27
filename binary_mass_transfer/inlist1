@@ -1,0 +1,98 @@
+
+! inlist_test_rlo
+
+
+
+&star_job
+      load_saved_model = .true.
+      !
+      ! ***** NOTE: pick the corresponding coreMass_Mearth in src/run_star_extras.f  ***** 
+      !
+      ! 1 Earth mass
+      saved_model_name = "../star_planet_models/1.0MeCore_1.0000_MJ_Irr_rhoCore5.0gcc_Z0.020_Y0.270_epsCore0.0E+00_Fstar_5.40E+09_SigmaStar_1.00E+00_Teq_1.mod"
+      
+      ! 5 Earth mass
+      saved_model_name = "../star_planet_models/5.0MeCore_1.0000_MJ_Irr_rhoCore5.0gcc_Z0.020_Y0.270_epsCore0.0E+00_Fstar_5.40E+09_SigmaStar_1.00E+00_Teq_1.mod"
+      
+      ! 10 Earth mass
+      saved_model_name = "../star_planet_models/10.0MeCore_1.0000_MJ_Irr_rhoCore5.0gcc_Z0.020_Y0.270_epsCore0.0E+00_Fstar_5.40E+09_SigmaStar_1.00E+00_Teq_1.mod"
+
+     ! 15 Earth mass
+     saved_model_name = "../star_planet_models/15.0MeCore_1.0000_MJ_Irr_rhoCore5.0gcc_Z0.020_Y0.270_epsCore0.0E+00_Fstar_5.40E+09_SigmaStar_1.00E+00_Teq_1.mod"
+
+     ! 30 Earth mass
+     saved_model_name = "../star_planet_models/30.0MeCore_1.0000_MJ_Irr_rhoCore5.0gcc_Z0.020_Y0.270_epsCore0.0E+00_Fstar_5.40E+09_SigmaStar_1.00E+00_Teq_1.mod"
+
+      show_log_description_at_start = .false.
+
+    set_initial_model_number = .true.
+    initial_model_number = 0
+
+!output format
+      history_columns_file = 'history_columns.list' 
+      profile_columns_file = 'profile_columns.list' 
+
+!rotational control
+      new_rotation_flag = .true.
+      change_rotation_flag = .true.
+      new_omega_div_omega_crit = 0.01
+      set_initial_omega_div_omega_crit = .true.
+
+!adding this for irradiation
+      change_net = .true.      
+      new_net_name = 'basic.net'
+
+      eos_file_prefix = 'mesa'
+      kappa_file_prefix = 'gs98'
+      kappa_lowT_prefix = 'lowT_Freedman11'
+
+      change_lnPgas_flag = .true.
+      new_lnPgas_flag = .true.
+
+
+/ ! end of star_job namelist
+
+
+
+&controls
+    !logQ_limit = 5.0d0
+    MLT_option = 'Henyey'
+
+	! set_uniform_am_nu and uniform_am_nu
+	! you can specify a uniform value for am_nu by setting this flag true
+    ! a large uniform am_nu will produce a uniform omega (solid body rotation)
+ 
+    set_uniform_am_nu_non_rot = .true.
+    uniform_am_nu_non_rot = 1d30
+
+    extra_terminal_output_file = 'log1' 
+    photo_directory = 'photos1'
+    log_directory = 'LOGS1'
+
+    photostep = 100000
+    max_num_profile_models = 1
+    profile_interval = 20
+    priority_profile_interval = 1000000
+    history_interval = 10
+    terminal_interval = 10
+    write_header_frequency = 20
+      
+    !use_other_torque = .true.
+
+   ! surface heating
+    column_depth_for_irradiation = 1.0 ! 250.0		! 1/kap_v
+    
+	!Irradiation and photoevaporation are re-computed at each time step in run_star_extras.f
+	!Below is the flux a planet would receive for a star and initial orbital separation
+	!as quoted in the manuscript
+	
+    irradiation_flux = 5396879380.7649727 	! day side flux = 4 sigma Teq^4. This is at 100 days
+    mass_change = -1.0e-20
+            
+/ ! end of controls namelist
+
+
+&pgstar
+         
+
+/ ! end of pgstar namelist

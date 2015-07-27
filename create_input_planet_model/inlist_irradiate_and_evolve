@@ -1,0 +1,72 @@
+! inlist_irradiate_and_evolve
+
+&star_job
+
+
+      show_log_description_at_start = .false.
+
+      history_columns_file = 'history_columns.list' 
+      profile_columns_file = 'profile_columns.list' 
+
+      load_saved_model = .true.
+      saved_model_name = 'core/5.0MeCore_1.0000_MJ_Irr_rhoCore5.0gcc_Z0.020_Y0.270_epsCore0.0E+00.mod'
+
+      save_model_when_terminate = .true.
+      save_model_filename = "irradiate_and_evolved/5.0MeCore_1.0000_MJ_Irr_rhoCore5.0gcc_Z0.020_Y0.270_epsCore0.0E+00_Fstar_5.40E+09_SigmaStar_1.00E+00_Teq_1.mod"
+
+      change_net = .true.      
+      new_net_name = 'basic.net'
+
+      set_initial_model_number = .true.
+      initial_model_number = 0      
+
+      set_initial_dt = .true.
+      years_for_initial_dt = 1.d-5 ! in years
+      
+      eos_file_prefix = 'mesa'
+      kappa_file_prefix = 'gs98'
+      kappa_lowT_prefix = 'lowT_Freedman11'
+
+      change_lnPgas_flag = .true.
+      new_lnPgas_flag = .true.
+
+      pgstar_flag = .false.
+            
+/ !end of star_job
+
+&controls
+
+	! for create_initial_model
+	initial_Z = 0.02
+	initial_Y = 0.27
+
+
+      MLT_option = 'Henyey'
+
+	! output to files and terminal
+      photostep = 1000
+      profile_interval = 10
+      history_interval = 2
+      terminal_cnt = 20
+      write_header_frequency = 10
+
+
+	 max_age = 2.00e+09
+     max_years_for_timestep = 1d8
+
+
+    column_depth_for_irradiation = 1.000e+00 ! 250.0		! 1/kap_v
+    irradiation_flux = 5.397e+09 	! day side flux = 4 sigma Teq^4.
+/
+
+
+&pgstar
+         
+      ! top level controls
+
+         !pause = .true. 
+            ! if true, the code waits for user to enter a RETURN on the command line
+      
+
+
+/ ! end of pgstar namelist

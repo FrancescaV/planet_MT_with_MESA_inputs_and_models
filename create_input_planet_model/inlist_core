@@ -1,0 +1,70 @@
+! inlist_core
+
+&star_job
+
+
+      show_log_description_at_start = .false.
+
+      load_saved_model = .true.
+      saved_model_name = "create/1.0000_MJ_Irr_rhoCore5.0gcc_Z0.020_Y0.270_epsCore0.0E+00.mod"
+
+      save_model_when_terminate = .true.
+      save_model_filename = "core/5.0MeCore_1.0000_MJ_Irr_rhoCore5.0gcc_Z0.020_Y0.270_epsCore0.0E+00.mod"
+
+      history_columns_file = 'history_columns.list' 
+      profile_columns_file = 'profile_columns.list' 
+      
+      ! controls for adding core of a certain density (alternatively, could fix radius)
+      relax_core = .true.
+      new_core_mass = 1.50221e-05 ! or pick what you'd like
+      core_avg_rho = 5.00 ! g/cm^3
+      core_avg_eps = 0.00 ! ergs/g/sec !from Arras notes, this is the heat coming from radioactive decay.
+      dlg_core_mass_per_step = 0.05     ! decrease if convergence problems
+      relax_core_years_for_dt = 0.1     ! increase(?) if convergence problems
+
+      change_net = .true.      
+      new_net_name = 'basic.net'
+
+      eos_file_prefix = 'mesa'
+      kappa_file_prefix = 'gs98'
+      kappa_lowT_prefix = 'lowT_Freedman11'
+
+      change_lnPgas_flag = .true.
+      new_lnPgas_flag = .true.
+
+      set_initial_model_number = .true.
+      initial_model_number = 0
+
+      set_initial_dt = .true.
+      years_for_initial_dt = 1.d-5 ! in years
+      
+/ !end of star_job
+
+&controls
+
+	! when to stop
+	max_age = 2.d3
+    max_model_number = 2000         ! don't let it go on and on if run stuck
+
+	! output to files and terminal
+	photostep = 5000
+	profile_interval = 100
+	max_num_profile_models=1
+	history_interval = 2
+	terminal_cnt = 10
+	write_header_frequency = 10
+
+   MLT_option = 'Henyey'
+   max_years_for_timestep = 1d9
+/
+
+
+&pgstar
+         
+      ! top level controls
+
+         !pause = .true. 
+            ! if true, the code waits for user to enter a RETURN on the command line
+      
+
+/ ! end of pgstar namelist

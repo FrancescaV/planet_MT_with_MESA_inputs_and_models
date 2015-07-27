@@ -1,0 +1,44 @@
+&binary_job
+
+   inlist_names(1) = 'inlist1' 
+   inlist_names(2) = 'inlist2'
+
+   evolve_both_stars = .true.
+
+/ ! end of binary_job namelist
+
+&binary_controls
+         
+   m1 = 9.5942701479285054D-04  ! donor mass in Msun
+   m2 = 1.0d0  ! companion mass in Msun
+   initial_period_in_days = 0.7d0
+
+   !Note: magnetic braking is handled in src/run_star_extras.f and src/run_binary_extras.f
+   do_jdot_mb = .false.
+   do_jdot_gr = .false.
+
+   sync_type_2 = "Hut_conv"
+   sync_mode_1 = "Uniform"
+   Ftid_2 = 50d0
+   tidal_reduction = 1.0d0
+	
+   sync_type_1 = "Instantaneous"
+   sync_mode_1 = "Uniform"
+
+   !rotation controls: this turn on tides.
+   do_tidal_sync = .true.
+   use_other_jdot_ls = .true.
+
+   mdot_scheme = "roche_lobe"
+
+   max_tries_to_achieve = 200
+   implicit_scheme_tolerance = 5d-5
+
+   fr = 0.01
+   
+   ! Comment/uncomment these to have conservative/non-conservative MT
+   !mass_transfer_alpha = 0.0d0
+   !mass_transfer_delta = 0.7d0
+   !mass_transfer_gamma = 1.0d0
+
+/ ! end of binary_controls namelist

@@ -1,0 +1,78 @@
+! inlist_create
+
+&star_job
+
+
+      show_log_description_at_start = .false.
+
+      history_columns_file = 'history_columns.list' 
+      profile_columns_file = 'profile_columns_CAFein.list' 
+
+      save_model_when_terminate = .true.
+      save_model_filename = "create/1.0000_MJ_Irr_rhoCore5.0gcc_Z0.020_Y0.270_epsCore0.0E+00.mod"
+      
+      ! new adiabatic, contracting initial model
+      create_initial_model = .true.
+      radius_in_cm_for_create_initial_model = 3.4955500000e+10 ! in cm
+      mass_in_gm_for_create_initial_model = 1.8986000000e+30 ! in grams
+
+!FIXME, this might be creating problems for some models
+      initial_model_relax_num_steps = 10
+	
+      change_net = .true.      
+      new_net_name = 'basic.net'
+
+
+      eos_file_prefix = 'mesa'
+      kappa_file_prefix = 'gs98'
+      kappa_lowT_prefix = 'lowT_Freedman11'
+
+      set_initial_model_number = .true.
+      initial_model_number = 0      
+
+      set_initial_dt = .true.
+      years_for_initial_dt = 1.d-5 ! in years
+
+      change_lnPgas_flag = .true.
+      new_lnPgas_flag = .true.
+
+      pgstar_flag = .false.
+            
+/ !end of star_job
+
+&controls
+
+	! for create_initial_model
+	initial_Z = 0.02
+	initial_Y = 0.27
+
+
+      MLT_option = 'Henyey'
+
+
+	! output to files and terminal
+      photostep = 5000
+      profile_interval = 100
+      history_interval = 100
+      terminal_cnt = 20
+      write_header_frequency = 10
+
+
+	! when to stop
+   max_age = 2d3
+   max_years_for_timestep = 1d9
+
+
+/
+
+
+&pgstar
+         
+      ! top level controls
+
+         !pause = .true. 
+            ! if true, the code waits for user to enter a RETURN on the command line
+      
+
+
+/ ! end of pgstar namelist

@@ -1,0 +1,23 @@
+This folder contains the MESA input files used in:
+
+"Tidally-driven Roche-Lobe Overflow of Hot Jupiters with MESA"
+Francesca Valsecchi, Saul Rappaport, Frederic A. Rasio, Pablo Marchant, & Leslie A. Rogers
+
+Specifically:
+
+- binary_mass_transfer contains the inlist files used for the Roche-lobe 
+overflow mass transfer calculations (see README for more details). 
+
+- create_input_planet_model contains the inlist files used to create the input planetary
+ models (see README for more details). 
+
+- create_input_star_model contains the inlist files used to create the input stellar model.
+
+- star_planet_models contains the input models used during the binary evolution calculation.
+These have been created following the inlist files in create_input_planet_model 
+and create_input_star_model mentioned above.
+
+**************************************** Note ****************************************
+To run a binary calculation, you only need the inlist files in binary_mass_transfer. 
+For convenience, the input models needed for the calculation are provided in 
+star_planet_models.

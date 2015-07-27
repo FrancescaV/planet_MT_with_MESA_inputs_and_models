@@ -1,0 +1,72 @@
+
+! inlist_test_rlo
+
+
+
+&star_job
+      load_saved_model = .true.
+      saved_model_name = "../star_planet_models/1.0Msun_z0.02_2Gyr.mod"
+
+	  history_columns_file = 'history_columns.list' 
+	  profile_columns_file = 'profile_columns.list' 
+
+      show_log_description_at_start = .false.
+
+      new_rotation_flag = .true.
+      change_rotation_flag = .true.
+      new_omega_div_omega_crit = 0.02
+      set_initial_omega_div_omega_crit = .true.
+
+    set_initial_model_number = .true.
+    initial_model_number = 0
+
+/ ! end of star_job namelist
+
+
+
+&controls
+
+  ! starting specifications
+      initial_mass = 1.0 ! in Msun units
+      initial_Z = 0.02
+      initial_Y = 0.27
+
+! when to stop	
+	max_age = 15.d10
+
+!    max_years_for_timestep = 1d7
+
+    ! set_uniform_am_nu and uniform_am_nu
+    ! you can specify a uniform value for am_nu by setting this flag true
+    ! a large uniform am_nu will produce a uniform omega
+ 
+    set_uniform_am_nu_non_rot = .true.
+    uniform_am_nu_non_rot = 1d30
+
+      extra_terminal_output_file = 'log2' 
+      photo_directory = 'photos2'
+      log_directory = 'LOGS2'
+
+   ! output to files and terminal
+      photostep = 100000
+      profile_interval = 20
+      terminal_cnt = 1
+      write_header_frequency = 20
+      max_num_profile_models = 1
+      history_interval = 10
+terminal_interval = 10
+
+      calculate_Brunt_N2 = .true.
+      use_brunt_dlnRho_form = .false.    ! if false, use Brassard form as revised by Mike Montgomery.
+      
+      !turn MB on, in my case.
+      use_other_torque = .true.
+
+/ ! end of controls namelist
+
+
+&pgstar
+         
+
+
+/ ! end of pgstar namelist

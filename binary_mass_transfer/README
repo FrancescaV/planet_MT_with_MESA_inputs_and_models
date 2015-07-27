@@ -1,0 +1,18 @@
+- inlist1 
+
+This file contains information about the planet (donor) settings. 
+A previously generated planetary model is read in input.
+The different core masses can be selected by uncommenting the relevant saved_model_name.
+Note, the parameter coreMass_Mearth in src/run_star_extras must be set accordingly.
+
+- inlist2 
+
+This file contains information about the star (accretor) settings.
+A previously generated stellar model is read in input.
+
+- inlist_project
+
+This file contains information about the binary configuration and relevant physical assumptions.
+Note, for non-conservative mass transfer the parameters that we varied are mass_transfer_alpha, 
+mass_transfer_delta, and mass_transfer_gamma.
+

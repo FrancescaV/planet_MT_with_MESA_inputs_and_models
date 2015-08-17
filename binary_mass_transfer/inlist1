@@ -50,6 +50,10 @@
       new_lnPgas_flag = .true.
 
 
+      set_initial_dt = .true.
+      years_for_initial_dt = 1d6
+
+
 / ! end of star_job namelist
 
 
